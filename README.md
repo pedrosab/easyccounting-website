@@ -1,28 +1,19 @@
-# Put this site online — step by step
+# Easyccounting website
 
 ## Status
 - ✅ Domain bought (GoDaddy)
-- ✅ Email set up (you@easyccounting.com via Zoho)
+- ✅ Email fully working (pedro@easyccounting.com via Zoho — MX, SPF, DKIM all verified)
 - ✅ GitHub repo created, files uploaded
-- ⬜ Turn on GitHub Pages
-- ⬜ Point domain to GitHub
-- ⬜ Edit placeholder text in index.html
+- ✅ Site content updated (name, email, pricing +tax)
+- ✅ GitHub Pages live at https://pedrosab.github.io/easyccounting-website/
+- ✅ Custom domain (easyccounting.com) connected via DNS
+- ✅ Calendly link added
 
-## 1. Edit the 2 things marked "EDIT" in index.html
-Open index.html (click it in your repo, then the pencil/edit icon) and change:
-- Calendly link (currently a placeholder link) — or remove that button if you don't have Calendly yet
-- Email address — replace with you@easyccounting.com (appears twice)
+## Reference: how this was set up
+- **GitHub Pages:** Settings → Pages → Source: main branch, root folder
+- **DNS (GoDaddy):** 4 A records (Name @) pointing to GitHub's IPs, 1 CNAME (Name www) pointing to pedrosab.github.io
+- **Email (Zoho, free tier, web-only):** MX records (mx.zoho.com, mx2.zoho.com), SPF TXT record, DKIM CNAME — all added via Zoho's one-click GoDaddy connect
 
-## 2. Turn on GitHub Pages
-- In the repo, go to Settings → Pages
-- Under "Source," pick the main branch, root folder
-- Save — GitHub gives you a URL like yourname.github.io/easyccounting-website
+No build tools, no hosting bill.
 
-## 3. Connect your domain
-- In GoDaddy, find your domain's DNS settings
-- Add a CNAME record pointing to yourname.github.io
-- Back in GitHub Settings → Pages, enter your custom domain (easyccounting.com) and save
-- This can take up to 24 hours to activate
-
-That's it — no build tools, no hosting bill.
 
