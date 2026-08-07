@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Easyccounting — Monthly bookkeeping for Fairfield County businesses</title>
+<meta name="description" content="Flat-fee monthly bookkeeping that works inside your existing QuickBooks. $145/month. No setup, no migration.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2A3D;
+    --paper:#F6F4EE;
+    --paper-line:#DAD5C7;
+    --brass:#A87332;
+    --brass-deep:#8A5D26;
+    --charcoal:#2B2B28;
+    --sage:#5C7A5C;
+    --muted:#6B6A62;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--charcoal);
+    font-family:'Inter',sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    color:var(--ink);
+    margin:0;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+  }
+  a{color:inherit;}
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  header.top{
+    padding:28px 0;
+    border-bottom:1px solid var(--paper-line);
+  }
+  header.top .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .brand{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.15rem;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .brand .dot{color:var(--brass);}
+  nav.top a{
+    font-size:0.9rem;
+    color:var(--muted);
+    text-decoration:none;
+    margin-left:28px;
+  }
+  nav.top a:hover{color:var(--ink);}
+
+  /* HERO — styled as a ledger entry */
+  .hero{
+    padding:72px 0 56px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--brass-deep);
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:2.6rem;
+    line-height:1.15;
+    max-width:14ch;
+  }
+  .hero p.sub{
+    margin-top:20px;
+    max-width:46ch;
+    color:var(--muted);
+    font-size:1.08rem;
+  }
+  .cta-row{
+    margin-top:32px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding:13px 26px;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    text-decoration:none;
+    border-radius:2px;
+  }
+  .btn-primary{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .btn-primary:hover{background:var(--brass-deep);}
+  .btn-ghost{
+    color:var(--ink);
+    border:1px solid var(--paper-line);
+  }
+  .btn-ghost:hover{border-color:var(--ink);}
+
+  /* the ledger strip — signature element */
+  .ledger{
+    margin-top:56px;
+    border-top:1px solid var(--ink);
+    border-bottom:1px solid var(--ink);
+    padding:0;
+  }
+  .ledger-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding:14px 0;
+    border-bottom:1px dashed var(--paper-line);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.92rem;
+  }
+  .ledger-row:last-child{border-bottom:none;}
+  .ledger-row .desc{color:var(--charcoal);}
+  .ledger-row .amt{color:var(--muted);}
+  .ledger-row.total{
+    font-weight:500;
+    padding-top:16px;
+  }
+  .ledger-row.total .desc,
+  .ledger-row.total .amt{color:var(--ink);}
+  .check{
+    color:var(--sage);
+    margin-right:6px;
+  }
+
+  section{
+    padding:64px 0;
+    border-top:1px solid var(--paper-line);
+  }
+  section .kicker{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--brass-deep);
+    margin-bottom:14px;
+  }
+  section h2{
+    font-size:1.7rem;
+    margin-bottom:28px;
+    max-width:20ch;
+  }
+
+  .steps{
+    display:grid;
+    gap:28px;
+  }
+  .step{
+    display:flex;
+    gap:20px;
+  }
+  .step .num{
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--brass);
+    font-size:0.95rem;
+    padding-top:2px;
+    flex:0 0 28px;
+  }
+  .step h3{
+    font-size:1.05rem;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .step p{
+    color:var(--muted);
+    margin:0;
+    font-size:0.98rem;
+  }
+
+  .grid-2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:36px;
+  }
+  .col h3{
+    font-size:1rem;
+    font-weight:600;
+    margin-bottom:14px;
+    color:var(--ink);
+  }
+  ul.plain{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  ul.plain li{
+    padding:8px 0;
+    border-bottom:1px solid var(--paper-line);
+    font-size:0.95rem;
+    color:var(--charcoal);
+  }
+  ul.plain li:last-child{border-bottom:none;}
+  ul.plain.out li{color:var(--muted);}
+
+  .pricing-card{
+    border:1px solid var(--ink);
+    padding:36px;
+    margin-top:8px;
+  }
+  .price{
+    font-family:'Fraunces',serif;
+    font-size:3rem;
+    color:var(--ink);
+    font-weight:600;
+  }
+  .price span{
+    font-family:'Inter',sans-serif;
+    font-size:1rem;
+    font-weight:500;
+    color:var(--muted);
+  }
+  .pricing-card p{
+    color:var(--muted);
+    margin-top:8px;
+  }
+
+  footer{
+    padding:48px 0 64px;
+    border-top:1px solid var(--paper-line);
+  }
+  footer p{
+    color:var(--muted);
+    font-size:0.9rem;
+  }
+  footer a.email{
+    color:var(--ink);
+    font-weight:600;
+    text-decoration:none;
+    border-bottom:1px solid var(--brass);
+  }
+
+  @media (max-width:640px){
+    .hero h1{font-size:2rem;}
+    .grid-2{grid-template-columns:1fr;gap:32px;}
+    nav.top a{margin-left:16px;font-size:0.85rem;}
+  }
+
+  @media (prefers-reduced-motion:no-preference){
+    .fade-in{
+      animation:fadeIn 0.6s ease-out both;
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(8px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+  }
+
+  :focus-visible{
+    outline:2px solid var(--brass);
+    outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="#top" class="brand">Easyccounting<span class="dot">.</span></a>
+    <nav class="top">
+      <a href="#included">What's included</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Get started</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero" style="border:none;padding-top:72px;">
+      <p class="eyebrow fade-in">Bookkeeping · Fairfield County, CT</p>
+      <h1 class="fade-in">Your books, reconciled every month. Nothing new to set up.</h1>
+      <p class="sub fade-in">We work inside the QuickBooks you already have. No migration, no new software to learn — just clean, reconciled books and a P&amp;L you can trust, every month.</p>
+      <div class="cta-row fade-in">
+        <a href="#contact" class="btn btn-primary">Get started</a>
+        <a href="#pricing" class="btn btn-ghost">See pricing</a>
+      </div>
+
+      <div class="ledger fade-in">
+        <div class="ledger-row">
+          <span class="desc">Your time spent chasing receipts</span>
+          <span class="amt">— hours/mo</span>
+        </div>
+        <div class="ledger-row">
+          <span class="desc">QuickBooks, already in place</span>
+          <span class="amt">no change</span>
+        </div>
+        <div class="ledger-row">
+          <span class="desc"><span class="check">✓</span>Books categorized, reconciled, reported</span>
+          <span class="amt">included</span>
+        </div>
+        <div class="ledger-row total">
+          <span class="desc">Ledgerline, flat monthly fee</span>
+          <span class="amt">$145/mo</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="how">
+      <p class="kicker">How it works</p>
+      <h2>Three steps. No setup on your end.</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="num mono">01</span>
+          <div>
+            <h3>We connect to your QuickBooks</h3>
+            <p>You add us as an accountant user — the same access you'd give any bookkeeper. Nothing to migrate, nothing to reconnect.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="num mono">02</span>
+          <div>
+            <h3>Every transaction gets categorized</h3>
+            <p>Recurring vendors are categorized automatically. Anything unusual is flagged and reviewed by a person before it hits your books.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="num mono">03</span>
+          <div>
+            <h3>You get reconciled statements, monthly</h3>
+            <p>Bank balances tie out. Your P&amp;L and balance sheet are ready before you need them — for taxes, a loan, or just knowing where you stand.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="included">
+      <p class="kicker">Scope</p>
+      <h2>What's in, what's not</h2>
+      <div class="grid-2">
+        <div class="col">
+          <h3>Included</h3>
+          <ul class="plain">
+            <li>Transaction categorization</li>
+            <li>Monthly bank &amp; card reconciliation</li>
+            <li>Monthly P&amp;L and balance sheet</li>
+            <li>One bank account + one card</li>
+            <li>Works inside your existing QuickBooks</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>Not included</h3>
+          <ul class="plain out">
+            <li>Tax filing &amp; tax advice</li>
+            <li>Payroll processing</li>
+            <li>Invoicing &amp; bill pay</li>
+            <li>Historical cleanup / catch-up bookkeeping</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <p class="kicker">Pricing</p>
+      <h2>One flat fee. No surprises.</h2>
+      <div class="pricing-card">
+        <div class="price">$145<span>/month</span></div>
+        <p>For businesses already on QuickBooks Online with a live bank feed connected. Up to ~150–200 transactions/month, one bank account, one card.</p>
+        <p style="margin-top:20px;">Books not current? Catch-up cleanup is scoped and priced separately, before your first monthly cycle starts.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <p class="kicker">Get started</p>
+      <h2>Let's look at your books.</h2>
+      <p style="color:var(--muted);max-width:46ch;">A short call to confirm you're a fit — already on QuickBooks, bank feed connected — and we can start next month.</p>
+      <div class="cta-row" style="margin-top:24px;">
+        <!-- EDIT: replace with your real Calendly link -->
+        <a href="https://calendly.com/your-link" class="btn btn-primary">Book a call</a>
+        <!-- EDIT: replace with your real email -->
+        <a href="mailto:you@yourdomain.com" class="btn btn-ghost">Email instead</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Easyccounting · Fairfield County, CT · <a href="mailto:you@yourdomain.com" class="email">you@yourdomain.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
