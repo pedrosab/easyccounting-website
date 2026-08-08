@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="logo-mark.svg">
 <style>
   :root{
     --ink:#1B2A3D;
@@ -61,6 +62,13 @@
     font-size:1.15rem;
     color:var(--ink);
     text-decoration:none;
+    display:flex;
+    align-items:center;
+  }
+  .brand svg{
+    height:30px;
+    width:auto;
+    display:block;
   }
   .brand .dot{color:var(--brass);}
   nav.top a{
@@ -282,7 +290,13 @@
 
 <header class="top">
   <div class="wrap">
-    <a href="#top" class="brand">Easyccounting<span class="dot">.</span></a>
+    <a href="#top" class="brand" aria-label="Easyccounting">
+      <svg viewBox="0 0 560 140" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="20" width="100" height="100" rx="6" fill="#E8730F"/>
+        <path d="M 30 72 L 50 92 L 84 48" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="128" y="94" font-family="Fraunces, Georgia, serif" font-size="56" font-weight="600" fill="#1B2A3D">Easyccounting<tspan fill="#E8730F">.</tspan></text>
+      </svg>
+    </a>
     <nav class="top">
       <a href="#included">What's included</a>
       <a href="how-we-work.html">How we work</a>
@@ -405,6 +419,7 @@
 <footer>
   <div class="wrap">
     <p>Easyccounting · <a href="mailto:pedro@easyccounting.com" class="email">pedro@easyccounting.com</a></p>
+    <p style="margin-top:6px;font-size:0.9rem;color:var(--muted);">Hablamos español &amp; Falamos Português</p>
     <p style="margin-top:6px;font-size:0.82rem;">&copy; 2026 Modulus Partners, LLC D/B/A Easyccounting</p>
   </div>
 </footer>
